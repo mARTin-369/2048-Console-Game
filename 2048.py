@@ -15,6 +15,11 @@ def get_random_empty_cell(mat, empty_cell, size):
     return x, y
 
 
+# Operation on combining tiles
+def combine(num):
+    return num * 2
+
+
 # Print board
 def printMat(mat, size):
     for i in range(size):
@@ -87,7 +92,7 @@ def main():
                     and mat[m + ip[0]][n + ip[1]] == mat[i][j]
                     and fused[m + ip[0]][n + ip[1]] != 1
                 ):
-                    num = mat[m + ip[0]][n + ip[1]] * 2
+                    num = combine(mat[m + ip[0]][n + ip[1]])
                     if num == goal:
                         won = True
 
