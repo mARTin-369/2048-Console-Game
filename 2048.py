@@ -3,9 +3,8 @@ size = 4
 # Game board
 mat = [[0, 0, 2, 4], [0, 0, 4, 8], [0, 2, 16, 32], [0, 2, 2, 16]]
 
-# Moves
-d = ((0, -1), (-1, 0), (0, 1), (1, 0))
-ip = d[0]
+# Moves (left, right, up, down)
+d = ((0, -1), (0, 1), (-1, 0), (1, 0))
 
 # Check board bounds during iteration
 def inbounds(i, j):
@@ -20,25 +19,38 @@ def printMat(mat):
         print()
 
 
-printMat(mat)
-
 # Logic on move
-for i in range(size):
-    for j in range(size):
-        m = i
-        n = j
-        num = mat[i][j]
-        while inbounds(m + ip[0], n + ip[1]) and mat[m + ip[0]][n + ip[1]] == 0:
-            m += ip[0]
-            n += ip[1]
+while True:
+    print("\n\n")
+    printMat(mat)
 
-        if inbounds(m + ip[0], n + ip[1]) and mat[m + ip[0]][n + ip[1]] == mat[i][j]:
-            num = mat[m + ip[0]][n + ip[1]] * 2
-            m += ip[0]
-            n += ip[1]
+    # Get user input move
+    n = int(input("\n\nNext move: "))
+    if n not in (1, 2, 3, 4):
+        if n != 5:
+            print("\n\nInvalid input...")
+        print("\nExiting...")
+        break
 
-        mat[i][j] = 0
-        mat[m][n] = num
+    ip = d[n - 1]
 
-print("\n")
-printMat(mat)
+    # Board state transition logic
+    for i in range(size):
+        for j in range(size):
+            m = i
+            n = j
+            num = mat[i][j]
+            while inbounds(m + ip[0], n + ip[1]) and mat[m + ip[0]][n + ip[1]] == 0:
+                m += ip[0]
+                n += ip[1]
+
+            if (
+                inbounds(m + ip[0], n + ip[1])
+                and mat[m + ip[0]][n + ip[1]] == mat[i][j]
+            ):
+                num = mat[m + ip[0]][n + ip[1]] * 2
+                m += ip[0]
+                n += ip[1]
+
+            mat[i][j] = 0
+            mat[m][n] = num
