@@ -5,6 +5,16 @@ def inbounds(i, j, size):
     return all([i >= 0, i < size, j >= 0, j < size])
 
 
+def get_random_empty_cell(mat, empty_cell, size):
+    emptyCells = []
+    for i in range(size):
+        for j in range(size):
+            if mat[i][j] == empty_cell:
+                emptyCells.append((i, j))
+    x, y = emptyCells[random.randint(0, len(emptyCells) - 1)]
+    return x, y
+
+
 # Print board
 def printMat(mat, size):
     for i in range(size):
@@ -23,12 +33,16 @@ def main():
     # Moves (left, right, up, down)
     d = ((0, -1), (0, 1), (-1, 0), (1, 0))
 
-    x, y = random.randint(0, size - 1), random.randint(0, size - 1)
+    x, y = get_random_empty_cell(mat, emptyCell, size)
     randNum = random.choice((2, 4))
     mat[x][y] = randNum
 
     # Logic on move
     while True:
+        x, y = get_random_empty_cell(mat, emptyCell, size)
+        randNum = random.choice((2, 4))
+        mat[x][y] = randNum
+
         print("\n\n")
         printMat(mat, size)
 
