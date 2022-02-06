@@ -56,10 +56,17 @@ def main():
             break
 
         ip = d[n - 1]
+        fr = to = inc = 0
+
+        # Set direction of iteration
+        if n in (1, 3):
+            fr, to, inc = 0, size, 1
+        else:
+            fr, to, inc = size - 1, -1, -1
 
         # Board state transition logic
-        for i in range(size):
-            for j in range(size):
+        for i in range(fr, to, inc):
+            for j in range(fr, to, inc):
                 m = i
                 n = j
                 num = mat[i][j]
