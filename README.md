@@ -3,4 +3,4 @@ Console version of 2048 game (CRAZE-A-THON: Ather Hiring Challenge)
 
 Run program *2048.py*
 
-![output](output/output.png)
+![output](output/output.PNG)
