@@ -29,6 +29,7 @@ def main():
 
     # Game board
     mat = [[emptyCell] * size for i in range(size)]
+    fused = [[0] * size for i in range(size)]
 
     # Moves (left, right, up, down)
     d = ((0, -1), (0, 1), (-1, 0), (1, 0))
@@ -72,13 +73,17 @@ def main():
                 if (
                     inbounds(m + ip[0], n + ip[1], size)
                     and mat[m + ip[0]][n + ip[1]] == mat[i][j]
+                    and fused[m + ip[0]][n + ip[1]] != 1
                 ):
                     num = mat[m + ip[0]][n + ip[1]] * 2
                     m += ip[0]
                     n += ip[1]
+                    fused[m][n] = 1
 
                 mat[i][j] = emptyCell
                 mat[m][n] = num
+
+        fused = [[0] * size for i in range(size)]
 
 
 if __name__ == "__main__":
