@@ -26,6 +26,8 @@ def printMat(mat, size):
 def main():
     size = 4
     emptyCell = "."
+    goal = 2048
+    won = False
 
     # Game board
     mat = [[emptyCell] * size for i in range(size)]
@@ -46,6 +48,9 @@ def main():
 
         print("\n\n")
         printMat(mat, size)
+
+        if won:
+            print("\n\nYou won!!!")
 
         # Get user input move
         n = int(input("\n\nNext move: "))
@@ -83,6 +88,9 @@ def main():
                     and fused[m + ip[0]][n + ip[1]] != 1
                 ):
                     num = mat[m + ip[0]][n + ip[1]] * 2
+                    if num == goal:
+                        won = True
+
                     m += ip[0]
                     n += ip[1]
                     fused[m][n] = 1
